@@ -14,6 +14,9 @@
  * Helps with search to ensure that "Alan" can be found with "alan"
  */
 void lowerCaseAllElements(std::string &str){
+	for(auto c : str){
+		c = tolower(c);
+	}
 }
 
 /*
@@ -85,13 +88,13 @@ class contactBookVector{
  		* Implementation of search functionality that uses brutal force to 
  		* iterate over all elements in the contactList to find the specificed contact
  		*/
-		/*contactPerson bruteForceSearch(std::string &first; std::string &last = ""; std::string &number = ""){
-			std::vector<contactPerson>::iterator it = this->contactList.begin();
-			contactPerson temp;
-			for(it; it!=this->contactList.end(); ++it){
-				if(it->firstName 			
+		contactPerson bruteForceSearch(std::string &first, std::string &last = " ", std::string &number = " "){
+			for(auto person : this->contactList){
+				if(person.firstName == first){
+					return person;
+				}
 			}
-		}*/		
+		};		
 
 	private:
 		std::vector<contactPerson> contactList;
@@ -114,11 +117,9 @@ int main(){
 	book1.print(std::cout);
 
 	std::cout << book1.total() << std::endl;
-	
-	std::vector<int> v{1, 2, 3, 4, 5};
-	for(auto i : v){
-		std::cout << i << ' ' << std::endl;
-	}
+
+	contactPerson temp = book1.bruteForceSearch(a);	
+	temp.print(std::cout);	
 
 	return 0;
-};
+}
