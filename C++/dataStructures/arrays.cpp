@@ -19,8 +19,6 @@ class myVector{
 		void insert(int);
 };
 
-
-
 int main(){
 	myVector testVector();
 
