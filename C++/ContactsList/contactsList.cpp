@@ -38,16 +38,29 @@ class contactPerson{
 			os << this->firstName << "\n"  << this->lastName << "\n" << this->phoneNum << std::endl;
 			return os;
 		};
+
+		/*
+ 		* Getters for access to person names
+ 		* Return type is a const reference to 
+ 		* 	1. Save computation time as it is faster to return a reference rather than
+ 		* 	a copy.
+ 		* 	2. Const to ensure that if you cannot change the name just by getting the
+ 		* 	reference.
+ 		*
+ 		* 	Note: Might not be doing what I think it does. 
+ 		*/	
+		std::string const &getFirstName(){
+			return this->firstName;
+		} 
+
+		 std::string const &getLastName(){
+			return this->lastName;
+		}
+		
+		std::string const &getPhoneNumber(){
+			return this->phoneNum;
+		}
 	
-		void setFirst(std::string name){
-			firstName = name;
-		};
-		void setLast(std::string name){
-			lastName = name;
-		};
-		void setNumber(std::string number){
-			phoneNum = number;
-		};
 	private:
 		std::string firstName, lastName, phoneNum;	
 };
@@ -77,6 +90,16 @@ class contactBookVector{
 		};
 		
 		/*
+ 		* A brute force search implemention
+ 		* Relys on iterating through the entire vector contactList
+ 		*/
+		void search(){
+			for(auto person : this->contactList){
+				person.print(std::cout);
+			}
+		}
+		
+		/*
  		* QuickSort
  		*
 		*contactBookVector &sortContactBook(){
@@ -84,18 +107,6 @@ class contactBookVector{
 		*	return *this;
 		};*/
 		
-		/*
- 		* Implementation of search functionality that uses brutal force to 
- 		* iterate over all elements in the contactList to find the specificed contact
- 		*/
-		contactPerson bruteForceSearch(std::string &first, std::string &last = " ", std::string &number = " "){
-			for(auto person : this->contactList){
-				if(person.firstName == first){
-					return person;
-				}
-			}
-		};		
-
 	private:
 		std::vector<contactPerson> contactList;
 };
@@ -103,23 +114,20 @@ class contactBookVector{
 int main(){
 	contactBookVector book1;
 
-	std::string a = "blah";
+	std::string a = "blah"; 
+
 	contactPerson person1(a, a);
 
 	std::string b = "world";
 	contactPerson person2(b, b);
-
-	std::string c = "12345";
-	person2.setNumber(c);
 
 	book1.add(person2);
 	book1.add(person1);
 	book1.print(std::cout);
 
 	std::cout << book1.total() << std::endl;
-
-	contactPerson temp = book1.bruteForceSearch(a);	
-	temp.print(std::cout);	
-
+	
+	book1.search();
+	
 	return 0;
 }
