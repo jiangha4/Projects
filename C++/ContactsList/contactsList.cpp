@@ -38,28 +38,18 @@ class contactPerson{
 			os << this->firstName << "\n"  << this->lastName << "\n" << this->phoneNum << std::endl;
 			return os;
 		};
-
-		/*
- 		* Getters for access to person names
- 		* Return type is a const reference to 
- 		* 	1. Save computation time as it is faster to return a reference rather than
- 		* 	a copy.
- 		* 	2. Const to ensure that if you cannot change the name just by getting the
- 		* 	reference.
- 		*
- 		* 	Note: Might not be doing what I think it does. 
- 		*/	
-		std::string const &getFirstName(){
+	
+		std::string getFirstName(){
 			return this->firstName;
-		} 
+		};
 
-		 std::string const &getLastName(){
+		 std::string getLastName(){
 			return this->lastName;
-		}
+		};
 		
-		std::string const &getPhoneNumber(){
+		std::string getPhoneNumber(){
 			return this->phoneNum;
-		}
+		};
 	
 	private:
 		std::string firstName, lastName, phoneNum;	
@@ -93,19 +83,21 @@ class contactBookVector{
  		* A brute force search implemention
  		* Relys on iterating through the entire vector contactList
  		*/
-		void search(){
+		std::vector<contactPerson> searchByName(const std::string &first, const std::string &last = std::string()){
+			std::vector<contactPerson> contacts;
 			for(auto person : this->contactList){
-				person.print(std::cout);
+				if(last.empty()){
+					if(person.getFirstName() == first){
+						contacts.push_back(person);
+					}
+				}else{
+					if(person.getFirstName() == first && person.getLastName() == last){
+						contacts.push_back(person);
+					} 
+				}
 			}
+			return contacts;
 		}
-		
-		/*
- 		* QuickSort
- 		*
-		*contactBookVector &sortContactBook(){
-		*	
-		*	return *this;
-		};*/
 		
 	private:
 		std::vector<contactPerson> contactList;
@@ -123,11 +115,11 @@ int main(){
 
 	book1.add(person2);
 	book1.add(person1);
-	book1.print(std::cout);
+	
+	std::vector<contactPerson> names = book1.searchByName(a, a);
+	for(auto a: names){
+		a.print(std::cout);
+	}
 
-	std::cout << book1.total() << std::endl;
-	
-	book1.search();
-	
 	return 0;
 }
