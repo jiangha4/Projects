@@ -14,7 +14,9 @@
 #include <iostream>
 #include <vector>
 #include <iterator>
+#include <fstream>
 
+using namespace std;
 /*
  * Class contactPerson is a set of strings that contains the contacts first name,
  * last name, and phone number. This class can also edit the individual values of
@@ -24,31 +26,31 @@
 class contactPerson{
 	public:
 		contactPerson() = default;
-		contactPerson(std::string first): firstName(first) {};
-		contactPerson(std::string first, std::string last)
+		contactPerson(string first): firstName(first) {};
+		contactPerson(string first, string last)
 		: firstName(first), lastName(last) {};
-		contactPerson(std::string first, std::string last, std::string number)
+		contactPerson(string first, string last, string number)
 		: firstName(first), lastName(last), phoneNum(number) {};
 
-		std::ostream &print(std::ostream &os){
+		ostream &print(ostream &os){
 			os << this->firstName << "\n"  << this->lastName << "\n" << this->phoneNum << std::endl;
 			return os;
 		};
 
-		std::string getFirstName(){
+		string getFirstName(){
 			return this->firstName;
 		};
 
-		 std::string getLastName(){
+		 string getLastName(){
 			return this->lastName;
 		};
 
-		std::string getPhoneNumber(){
+		string getPhoneNumber(){
 			return this->phoneNum;
 		};
 
 	private:
-		std::string firstName, lastName, phoneNum;
+		string firstName, lastName, phoneNum;
 };
 
 /*
@@ -63,12 +65,12 @@ class contactBookVector{
 			return *this;
 		};
 
-		std::vector<contactPerson>::size_type total(){
+		vector<contactPerson>::size_type total(){
 			return this->contactList.size();
 		};
 
-		std::ostream &print(std::ostream &os){
-			std::vector<contactPerson>::iterator it = this->contactList.begin();
+		ostream &print(ostream &os){
+			vector<contactPerson>::iterator it = this->contactList.begin();
 			for(it; it != this->contactList.end(); ++it){
 				(*it).print(os);
 			}
@@ -76,9 +78,18 @@ class contactBookVector{
 		};
 
 	private:
-		std::vector<contactPerson> contactList;
+		vector<contactPerson> contactList;
 };
 
-int main(){
+int main(int argc, char* argv[]){
+	if(argc != 2){
+		cout << "Usage: " << argv[0] << " conctact file name\n" << endl;
+	}else{
+		ifstream contactsFile(argv[1]);
+		string contacts;
+		while(getline(contactsFile, contacts)){
+			cout << contacts << '\n' << endl;
+		}
+	}
 	return 0;
 }
