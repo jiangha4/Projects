@@ -15,6 +15,7 @@
 #include <vector>
 #include <iterator>
 #include <fstream>
+#include <sstream>
 
 using namespace std;
 /*
@@ -81,14 +82,22 @@ class contactBookVector{
 		vector<contactPerson> contactList;
 };
 
+
+
 int main(int argc, char* argv[]){
 	if(argc != 2){
-		cout << "Usage: " << argv[0] << " conctact file name\n" << endl;
+		cout << "Usage: " << argv[0] << " contact file name\n" << endl;
 	}else{
 		ifstream contactsFile(argv[1]);
 		string contacts;
+		contactBookVector book1;
 		while(getline(contactsFile, contacts)){
-			cout << contacts << '\n' << endl;
+			cout << 'Reading' << contacts << '\n' << endl;
+			istream(contacts);
+			string info;
+			while(getline(contacts, info)){
+				//Want to create a way to create a person object in this loop
+			}
 		}
 	}
 	return 0;
