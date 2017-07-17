@@ -34,24 +34,25 @@ class contactPerson{
 		: firstName(first), lastName(last), phoneNum(number) {};
 
 		ostream &print(ostream &os){
-			os << this->firstName << "\n"  << this->lastName << "\n" << this->phoneNum << std::endl;
+			os << this->firstName << ' ' << this->lastName << ' ' << this->phoneNum << endl;
 			return os;
-		};
-
-		string getFirstName(){
-			return this->firstName;
-		};
-
-		 string getLastName(){
-			return this->lastName;
-		};
-
-		string getPhoneNumber(){
-			return this->phoneNum;
 		};
 
 	private:
 		string firstName, lastName, phoneNum;
+};
+
+
+contactPerson createFromRecord(istringstream& record){
+	string first;
+	string last;
+	string num;
+	record >> first;
+	record >> last;
+	record >> num;
+	contactPerson newPerson(first, last, num);
+
+	return newPerson;
 };
 
 /*
@@ -92,13 +93,13 @@ int main(int argc, char* argv[]){
 		string contacts;
 		contactBookVector book1;
 		while(getline(contactsFile, contacts)){
-			cout << 'Reading' << contacts << '\n' << endl;
-			istream(contacts);
-			string info;
-			while(getline(contacts, info)){
-				//Want to create a way to create a person object in this loop
-			}
+			//Got a line from the file contain a record of a person 
+			//First Last Number
+			istringstream records(contacts);
+			contactPerson personRecord = createFromRecord(records);
+			book1.add(personRecord);
 		}
+		book1.print(cout);
 	}
 	return 0;
 }
