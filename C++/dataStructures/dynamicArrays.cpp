@@ -12,15 +12,17 @@ using namespace std;
  */
 
 class myVector{
+	public:
+		myVector() = default;
+		myVector(int *p): beginning(p) {};
 	private:
-		int size;
-		int capacity;
-		
-		
+		int* beginning; 
 };
 
 int main(){
-
+	int a1({1, 2 ,3});
+	myVector v1(a1);
+	cout << v1 << endl;
 	return 0;
 }
 
