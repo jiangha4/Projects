@@ -25,6 +25,7 @@ using namespace std;
  */
 
 class contactPerson{
+	friend class contactBookVector;
 	public:
 		contactPerson() = default;
 		contactPerson(string first): firstName(first) {};
@@ -59,7 +60,6 @@ contactPerson createFromRecord(istringstream& record){
  * Class contactBook is a vector that takes in the class contactPeople
  */
 class contactBookVector{
-	friend class contactPerson;
 	public:
 		contactBookVector() = default;
 
