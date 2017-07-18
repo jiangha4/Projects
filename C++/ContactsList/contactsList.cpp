@@ -79,6 +79,19 @@ class contactBookVector{
 			return os;
 		};
 
+		vector<contactPerson> searchByFirstName(string firstName){
+			vector<contactPerson> match;
+			vector<contactPerson> iterator it = this->contactList.begin();
+			for(it; it != this.contactList.end(); ++it){
+				
+			}
+		};
+
+		vector<contactPerson> searchByLastName(string lastName){};
+
+		vector<contactPerson> searchByNum(string num){};
+
+
 	private:
 		vector<contactPerson> contactList;
 };
