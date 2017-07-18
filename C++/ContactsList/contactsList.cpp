@@ -38,8 +38,10 @@ class contactPerson{
 			return os;
 		};
 
+		string firstName;
+
 	private:
-		string firstName, lastName, phoneNum;
+		string lastName, phoneNum;
 };
 
 
@@ -81,15 +83,19 @@ class contactBookVector{
 
 		vector<contactPerson> searchByFirstName(string firstName){
 			vector<contactPerson> match;
-			vector<contactPerson> iterator it = this->contactList.begin();
-			for(it; it != this.contactList.end(); ++it){
-				
+			vector<contactPerson>::iterator it = this->contactList.begin();
+			for(it; it != this->contactList.end(); ++it){
+				contactPerson person = (*it);
+				if (person.firstName == firstName){
+					match.push_back(person);
+				}
 			}
+			return match;
 		};
 
-		vector<contactPerson> searchByLastName(string lastName){};
+		//vector<contactPerson> searchByLastName(string lastName){};
 
-		vector<contactPerson> searchByNum(string num){};
+		//vector<contactPerson> searchByNum(string num){};
 
 
 	private:
@@ -112,7 +118,11 @@ int main(int argc, char* argv[]){
 			contactPerson personRecord = createFromRecord(records);
 			book1.add(personRecord);
 		}
-		book1.print(cout);
+		//book1.print(cout);
+		string s("Lebron");
+		vector<contactPerson> match;
+		match = book1.searchByFirstName(s);
+		match[0].print(cout);
 	}
 	return 0;
 }
