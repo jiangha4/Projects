@@ -38,10 +38,8 @@ class contactPerson{
 			return os;
 		};
 
-		string firstName;
-
 	private:
-		string lastName, phoneNum;
+		string firstName, lastName, phoneNum;
 };
 
 
@@ -61,6 +59,7 @@ contactPerson createFromRecord(istringstream& record){
  * Class contactBook is a vector that takes in the class contactPeople
  */
 class contactBookVector{
+	friend class contactPerson;
 	public:
 		contactBookVector() = default;
 
