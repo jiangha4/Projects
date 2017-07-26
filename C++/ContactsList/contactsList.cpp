@@ -92,10 +92,18 @@ class contactBookVector{
 			return match;
 		};
 
-		//vector<contactPerson> searchByLastName(string lastName){};
+		vector<contactPerson> searchByLastName(string lastName){
+			vector<contactPerson> match;
+			vector<contactPerson>::iterator it = this->contactList.begin();
+			for(it; it != this->contactList.end(); ++it){
+				contactPerson person = (*it);
+				if (person.lastName == lastName){
+					match.push_back(person);
+				}
+			}
+			return match;
 
-		//vector<contactPerson> searchByNum(string num){};
-
+		};
 
 	private:
 		vector<contactPerson> contactList;
@@ -119,8 +127,11 @@ int main(int argc, char* argv[]){
 		}
 		//book1.print(cout);
 		string s("Lebron");
+		string d("Ivering");
 		vector<contactPerson> match;
 		match = book1.searchByFirstName(s);
+		match[0].print(cout);
+		match = book1.searchByLastName(d);
 		match[0].print(cout);
 	}
 	return 0;
