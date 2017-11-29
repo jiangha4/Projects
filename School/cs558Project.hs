@@ -69,7 +69,7 @@ myInsertHashHelper :: Eq b => [HashTableEntry [Char] b] -> Int -> [Char] -> b ->
 myInsertHashHelper table index newKey newValue =
 	let (previous, slot:next) = splitAt index table in previous ++ [Slot (newKey, newValue)] ++ next
 
---myHashFold :: [HashTableEntry [Char] b] -> b -> (b -> b -> b) -> b
+-- myHashFold :: [HashTableEntry [Char] b] -> b -> (b -> a -> b) -> a
 myHashFold table starter func =
 	case table of
 		(Slot (key, value) : nextSlot) -> myHashFold nextSlot (func value starter) func
@@ -138,10 +138,10 @@ trueOrFalse entry acc =
 		(key, value) -> if value then acc + 1 else acc
 
 -- Number of copies Linked List		
-numOfCopiesLL = myFold dictLL 0 trueOrFalse
+numOfCopiesLL dict = myFold dict 0 trueOrFalse
 
 -- Number of copies Hash Table
-numofCopiesHT = myHashFold dictHT 0 trueOrFalse
+numofCopiesHT dict = myHashFold dict 0 trueOrFalse
 
 main = do 
 	putStrLn "----------------------- CS 558 Project ------------------------"
