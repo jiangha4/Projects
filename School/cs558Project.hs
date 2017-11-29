@@ -30,7 +30,7 @@ myLookup curDict key =
 --myFold :: LinkedListDict a b -> b -> (b -> b -> b) -> b
 myFold curDict starter func = 
 	case curDict of
-		Entry ((curKey, curValue), nextEntry) -> myFold nextEntry (func starter curValue) func
+		Entry ((curKey, curValue), nextEntry) -> myFold nextEntry (func curValue starter) func
 		MyNil -> starter
 
 -- Implementation 2 Hash Table
@@ -69,10 +69,10 @@ myInsertHashHelper :: Eq b => [HashTableEntry [Char] b] -> Int -> [Char] -> b ->
 myInsertHashHelper table index newKey newValue =
 	let (previous, slot:next) = splitAt index table in previous ++ [Slot (newKey, newValue)] ++ next
 
-myHashFold :: [HashTableEntry [Char] b] -> b -> (b -> b -> b) -> b
+--myHashFold :: [HashTableEntry [Char] b] -> b -> (b -> b -> b) -> b
 myHashFold table starter func =
 	case table of
-		(Slot (key, value) : nextSlot) -> myHashFold nextSlot (func starter value) func
+		(Slot (key, value) : nextSlot) -> myHashFold nextSlot (func value starter) func
 		(Empty : nextSlot) -> myHashFold nextSlot starter func
 		_ -> starter
 
@@ -136,8 +136,12 @@ lookupHash = map (\key -> myLookupHash dictHT key) lookupList
 trueOrFalse entry acc = 
 	case entry of
 		(key, value) -> if value then acc + 1 else acc
-		
-numOfCopiesLL dict = myFold dict trueOrFalse 0
+
+-- Number of copies Linked List		
+numOfCopiesLL = myFold dictLL 0 trueOrFalse
+
+-- Number of copies Hash Table
+numofCopiesHT = myHashFold dictHT 0 trueOrFalse
 
 main = do 
 	putStrLn "----------------------- CS 558 Project ------------------------"
