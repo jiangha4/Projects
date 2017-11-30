@@ -127,10 +127,12 @@ dictHT = hashTableInserter testDictHash testListKeys testListPair
 lookupList = genList 3 [1..332]
 
 -- Lookup on linked list dict
-lookupLL = map (\key -> myLookup dictLL key) lookupList  
+lookupLL = map (\key -> myLookup dictLL key) lookupList 
+foundLL = filter (\entry -> if entry == MyNothing then False else True) lookupLL
 
 -- Lookup on hash table dict
 lookupHash = map (\key -> myLookupHash dictHT key) lookupList
+foundHT = filter (\entry -> if entry == MyNothing then False else True) lookupHash
 
 -- Function that determines if value in the pair is true
 trueOrFalse entry acc = 
@@ -139,21 +141,46 @@ trueOrFalse entry acc =
 
 -- Number of copies Linked List		
 numOfCopiesLL dict = myFold dict 0 trueOrFalse
+numCopiesLL = numOfCopiesLL dictLL
 
 -- Number of copies Hash Table
 numofCopiesHT dict = myHashFold dict 0 trueOrFalse
+numCopiesHT = numofCopiesHT dictHT
 
 main = do 
 	putStrLn "----------------------- CS 558 Project ------------------------"
 	putStrLn "\n"
+	putStr "For additional information on implementation of the client, or either implementations "
+	putStrLn "of the dictionary the source code has comments."
 	putStrLn "----------------------- Part 1 ------------------------"
+	putStrLn "\n"
 	putStrLn "Creating Empty Dictionaries"
 	putStrLn "Creating 1000 empty entries for Hash table dictionary"
-	print testDictHash
 	putStrLn "\n"
-	putStrLn "Creating Empty Linked List Dictionary"
-	print testDictLL
+	putStrLn "Creating Empty Linked List Dictionary"	
+	putStrLn "To view empty dictionaries, type into ghci testDictLL for linked list and testDictHT for hash table" 
 	putStrLn "\n"
 	putStrLn "---------------------------------------------------------"
 	putStrLn "\n"
-	putStrLn "----------------------- Part 2 ------------------------"
+	putStrLn "----------------------- Part 2 -------------------------"
+	putStrLn "\n"
+	putStrLn "Values being inserted into dictionaries are of type ([Char], (Int, Bool))"
+	putStrLn "To view dictionaries after insertation, type into ghci dictLL for linked list and dictHT for hash table" 
+	putStrLn "\n"
+	putStrLn "---------------------------------------------------------"
+	putStrLn "\n"
+	putStrLn "----------------------- Part 3 -------------------------"
+	putStrLn "\n"
+	putStrLn "Finding all values whose key is 3i when 1 <= i < 333"	
+	putStrLn "Typing foundLL will return a list of all values whose keys are 3i using the Linked List implementation"
+	putStrLn "Typing foundHT will return a list of all values whose keys are 3i using the hash table implementation"
+	putStrLn "\n"
+	putStrLn "---------------------------------------------------------"
+	putStrLn "\n"
+	putStrLn "----------------------- Part 4 -------------------------"
+	putStrLn "\n"
+	putStrLn "Using myFold to compute the number of entries with true as a value "
+	putStrLn "Typing numCopiesLL will return the number using linked list implementation"
+	putStrLn "Typing numCopesHT will return the number using hash table implementation"
+	putStrLn "\n"
+	putStrLn "---------------------------------------------------------"
