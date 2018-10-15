@@ -1,0 +1,8 @@
+#+TITLE: Projects
+
+This repo is currently being used as a catch-all folder for stuff that I'm currently
+working on.
+
+This includes small coding questions to large web applications.
+
+
